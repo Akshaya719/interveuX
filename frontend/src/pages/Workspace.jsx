@@ -8,6 +8,7 @@ import QuestionPanel from '../components/QuestionPanel';
 import ControlPanel from '../components/ControlPanel';
 import ExecutionPanel from '../components/ExecutionPanel';
 import QuestionPickerModal from '../components/QuestionPickerModal';
+import VideoCall from '../components/VideoCall';
 
 const DEFAULT_CODE = {
   javascript: '// Write your solution here\nfunction solution() {\n  \n}\n',
@@ -413,6 +414,9 @@ const Workspace = () => {
           </div>
         </div>
       )}
+
+      {/* WebRTC Video Call */}
+      <VideoCall socket={socket} sessionId={sessionId} />
     </div>
   );
 };

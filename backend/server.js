@@ -110,6 +110,19 @@ io.on('connection', (socket) => {
     } catch (e) { console.error('Failed to save event', e); }
   });
 
+  // WebRTC Signaling
+  socket.on('webrtc-offer', ({ sessionId, offer }) => {
+    socket.to(sessionId).emit('webrtc-offer', offer);
+  });
+
+  socket.on('webrtc-answer', ({ sessionId, answer }) => {
+    socket.to(sessionId).emit('webrtc-answer', answer);
+  });
+
+  socket.on('webrtc-ice-candidate', ({ sessionId, candidate }) => {
+    socket.to(sessionId).emit('webrtc-ice-candidate', candidate);
+  });
+
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
   });
