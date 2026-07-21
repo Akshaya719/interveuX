@@ -70,6 +70,7 @@ const Workspace = () => {
   const [savedDraft, setSavedDraft] = useState(false);
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
   const typingTimer = useRef(null);
+  const startTimeRef = useRef(Date.now());
 
   useEffect(() => {
     const newSocket = io('http://localhost:5001');
@@ -262,12 +263,12 @@ const Workspace = () => {
     setIsRunning(true);
     await saveDraft(true);
     
-    // Calculate metrics
+    // Calculate actual time spent (in seconds)
     const runs = executionHistory.length;
     const lastRun = executionHistory[executionHistory.length - 1];
     const passedTests = lastRun?.passedVisible || 0;
     const totalTests = lastRun?.totalVisible || visibleTestCases.length;
-    const durationSpent = (duration * 60) - 0; // Simplified for now, real timer diff needed ideally
+    const durationSpent = Math.floor((Date.now() - startTimeRef.current) / 1000);
     
     try {
       await axios.post(`http://localhost:5001/api/sessions/${sessionId}/submit`, {
