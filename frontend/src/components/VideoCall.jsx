@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useAuthStore from '../../store/useAuthStore';
+import useAuthStore from '../store/useAuthStore';
 import { Mic, MicOff, Video, VideoOff } from 'lucide-react';
 
 const ICE_SERVERS = {
